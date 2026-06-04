@@ -16,7 +16,15 @@ RUN apt-get update && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN adduser --system --home /home/steam steam
+RUN adduser \
+    --home /home/steam \
+    --disabled-password \
+    --shell /bin/bash \
+    --uid 1000 \
+    --quiet \
+    steam && \
+    mkdir -p /home/steam/steamcmd /home/steam/Unturned && \
+    chown -R steam:steam /home/steam
 
 USER steam
 WORKDIR $STEAMCMD_DIR
