@@ -30,7 +30,7 @@ if [ "$OPENMOD_ENABLED" = "true" ]; then
     if [ ! -d "$OPENMOD_DIR" ]; then
         mkdir -p "$MODULES_DIR"
         curl -fsSL "$OPENMOD_INSTALL_URL" -o OpenMod.Unturned.Module.zip
-        unzip OpenMod.Unturned.Module.zip -d "$MODULES_DIR"
+        unzip -o -q OpenMod.Unturned.Module.zip -d "$MODULES_DIR"
         rm OpenMod.Unturned.Module.zip
     fi
 elif [ -d "$OPENMOD_DIR" ]; then
