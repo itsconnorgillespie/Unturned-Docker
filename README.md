@@ -38,9 +38,9 @@ The following environment variables can be utilized to tailor the Docker image t
 4. `OPENMOD_INSTALL`
 - Expected: "true" or "false"
 - Default: "false"
-- Description: Install OpenMod if not already installed.
+- Description: If enabled, installs OpenMod if not already installed. If disabled, removes OpenMod if installed.
 
 5. `ROCKETMOD_INSTALL`
 - Expected: "true" or "false"
 - Default: "false"
-- Description: Install RocketMod if not already installed.
+- Description: If enabled, installs RocketMod if not already installed. If disabled, removes RocketMod if installed.
