@@ -1,19 +1,23 @@
-FROM ubuntu:jammy
+FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV STEAMCMD_INSTALL_DIR=/home/steam/steamcmd
 ENV GAME_INSTALL_DIR=/home/steam/Unturned
 ENV GAME_ID=1110390
 ENV SERVER_NAME=server
-ENV STEAMCMD_DIR=/home/steam/steamcmd
+ENV OPENMOD_INSTALL_URL=https://github.com/openmod/openmod/releases/latest/download/OpenMod.Unturned.Module.zip
+ENV OPENMOD_INSTALL=false
+ENV ROCKETMOD_INSTALL=false
 
 EXPOSE 27015/udp
 EXPOSE 27016/udp
 
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
         curl \
+        unzip \
         lib32gcc-s1 && \
-    apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN adduser \
@@ -23,14 +27,13 @@ RUN adduser \
     --uid 1000 \
     --quiet \
     steam && \
-    mkdir -p /home/steam/steamcmd /home/steam/Unturned && \
+    mkdir -p $STEAMCMD_INSTALL_DIR $GAME_INSTALL_DIR && \
     chown -R steam:steam /home/steam
 
 USER steam
-WORKDIR $STEAMCMD_DIR
+WORKDIR $STEAMCMD_INSTALL_DIR
 
-RUN mkdir -p "$GAME_INSTALL_DIR" && \
-    curl -s https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar -xz && \
+RUN curl -fsSL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar -xz && \
     ./steamcmd.sh +quit && \
     mkdir -p /home/steam/.steam/sdk64/ && \
     cp -f linux64/steamclient.so /home/steam/.steam/sdk64/steamclient.so
