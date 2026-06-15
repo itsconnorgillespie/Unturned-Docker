@@ -38,6 +38,6 @@ RUN curl -fsSL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
     mkdir -p /home/steam/.steam/sdk64/ && \
     cp -f linux64/steamclient.so /home/steam/.steam/sdk64/steamclient.so
 
-COPY --chown=steam:steam --chmod=755 init.sh .
+COPY --chown=steam:steam --chmod=755 entrypoint.sh .
 
-ENTRYPOINT ["./init.sh"]
+ENTRYPOINT ["./entrypoint.sh"]

@@ -9,6 +9,9 @@ bash ./steamcmd.sh \
     +app_update "$GAME_ID" validate \
     +quit
 
+mkdir -p /home/steam/.steam/sdk64
+cp -f "$STEAMCMD_INSTALL_DIR/linux64/steamclient.so" /home/steam/.steam/sdk64/steamclient.so
+
 cd "$GAME_INSTALL_DIR" || exit
 
 ulimit -n 2048
