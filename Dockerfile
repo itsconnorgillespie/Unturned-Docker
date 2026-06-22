@@ -9,6 +9,8 @@ ENV OPENMOD_INSTALL_URL=https://github.com/openmod/openmod/releases/latest/downl
 ENV OPENMOD_INSTALL=false
 ENV ROCKETMOD_INSTALL=false
 
+EXPOSE 27015/tcp
+EXPOSE 27016/tcp
 EXPOSE 27015/udp
 EXPOSE 27016/udp
 
